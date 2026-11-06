@@ -23,6 +23,12 @@ html {
   overflow-x: clip;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);
@@ -135,7 +141,35 @@ body {
   animation-delay: 0.44s;
 }
 
+/* Seções: entrada ao rolar a página */
+.mf-scroll-reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.mf-scroll-reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: auto;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .mf-scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  .mf-scroll-reveal--visible {
+    opacity: 1;
+    transform: none;
+  }
+
   .mf-hero-overlay-bubble {
     animation: none;
     clip-path: inset(0);

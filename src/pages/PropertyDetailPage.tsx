@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { getListingById } from '../data/listings'
 import NotFoundPage from './NotFoundPage'
 import Footer from '../components/Footer'
+import ScrollReveal from '../components/ScrollReveal'
 
 const URL_WHATSAPP = 'https://wa.me/5581999999999'
 
@@ -54,6 +55,7 @@ export default function PropertyDetailPage() {
     <>
       <main className="bg-mf-ice/35 pb-16 pt-[calc(5rem+env(safe-area-inset-top))] text-mf-navy sm:pb-20 sm:pt-[calc(5.25rem+env(safe-area-inset-top))] lg:pt-[calc(5.75rem+env(safe-area-inset-top))]">
         <div className="mx-auto max-w-7xl px-6 lg:px-12">
+          <ScrollReveal>
           <nav className="text-sm text-mf-navy/55" aria-label="Trilha">
             <Link to="/#comprar" className="text-mf-blue no-underline hover:underline">
               Imóveis
@@ -188,7 +190,9 @@ export default function PropertyDetailPage() {
               </div>
             </div>
           </div>
+          </ScrollReveal>
 
+          <ScrollReveal>
           <section
             className="mt-14 scroll-mt-28 rounded-2xl border border-mf-navy/10 bg-mf-white p-6 shadow-sm sm:p-8"
             aria-labelledby="ficha-titulo"
@@ -217,7 +221,9 @@ export default function PropertyDetailPage() {
               ))}
             </dl>
           </section>
+          </ScrollReveal>
 
+          <ScrollReveal>
           <section className="mt-12" aria-labelledby="plantas-titulo">
             <h2
               id="plantas-titulo"
@@ -250,7 +256,9 @@ export default function PropertyDetailPage() {
               ))}
             </ul>
           </section>
+          </ScrollReveal>
 
+          <ScrollReveal>
           <p className="mt-10 text-center text-sm text-mf-navy/55 lg:text-left">
             <Link
               to="/#comprar"
@@ -259,9 +267,12 @@ export default function PropertyDetailPage() {
               ← Voltar para a lista de imóveis
             </Link>
           </p>
+          </ScrollReveal>
         </div>
       </main>
-      <Footer />
+      <ScrollReveal rootMargin="0px 0px -20px 0px">
+        <Footer />
+      </ScrollReveal>
     </>
   )
 }
