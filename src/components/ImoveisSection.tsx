@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type SelectHTMLAttributes } from 'react'
 import { Link } from 'react-router-dom'
 import { LISTINGS, type CityId, type PropertyTier, type PropertyListing } from '../data/listings'
 import { listingDetailPath } from '../routes'
+import ScrollReveal from './ScrollReveal'
 
 const ALL = '__all__' as const
 
@@ -306,8 +307,14 @@ export default function ImoveisSection() {
                                 contato para encontrar outras opções.
                             </p>
                         ) : (
-                            imoveisVisiveis.map((listing) => (
-                                <ListingCard key={listing.id} listing={listing} />
+                            imoveisVisiveis.map((listing, index) => (
+                                <ScrollReveal
+                                    key={listing.id}
+                                    delayMs={Math.min(index * 75, 450)}
+                                    rootMargin="0px 0px -12% 0px"
+                                >
+                                    <ListingCard listing={listing} />
+                                </ScrollReveal>
                             ))
                         )}
                     </div>

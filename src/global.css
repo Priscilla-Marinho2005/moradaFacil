@@ -144,10 +144,10 @@ body {
 /* Seções: entrada ao rolar a página */
 .mf-scroll-reveal {
   opacity: 0;
-  transform: translateY(1.25rem);
+  transform: translateY(2.5rem);
   transition:
-    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
