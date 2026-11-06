@@ -19,7 +19,154 @@
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
 }
 
+html {
+  overflow-x: clip;
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+/* Luzes azuis difusas que “andam” pelo hero (respeita prefers-reduced-motion) */
+@keyframes mf-hero-glow-drift-a {
+  0%,
+  100% {
+    transform: translate(-8%, -6%) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(42%, 18%) scale(1.12) rotate(4deg);
+  }
+  66% {
+    transform: translate(12%, 48%) scale(0.94) rotate(-3deg);
+  }
+}
+
+@keyframes mf-hero-glow-drift-b {
+  0%,
+  100% {
+    transform: translate(35%, -25%) scale(1.05) rotate(0deg);
+  }
+  40% {
+    transform: translate(-28%, 22%) scale(1.18) rotate(-5deg);
+  }
+  70% {
+    transform: translate(-5%, -15%) scale(0.9) rotate(3deg);
+  }
+}
+
+@keyframes mf-hero-glow-drift-c {
+  0%,
+  100% {
+    transform: translate(-35%, 30%) scale(1);
+  }
+  50% {
+    transform: translate(55%, -8%) scale(1.22);
+  }
+}
+
+.hero-mf-glow-a {
+  will-change: transform;
+  animation: mf-hero-glow-drift-a 26s ease-in-out infinite;
+}
+
+.hero-mf-glow-b {
+  will-change: transform;
+  animation: mf-hero-glow-drift-b 32s ease-in-out infinite;
+  animation-delay: -8s;
+}
+
+.hero-mf-glow-c {
+  will-change: transform;
+  animation: mf-hero-glow-drift-c 21s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+/* Hero: overlay em “bolha” (círculo expandindo) e entrada dos textos */
+@keyframes mf-hero-overlay-bubble {
+  from {
+    clip-path: circle(0% at 50% 42%);
+  }
+  to {
+    clip-path: circle(150% at 50% 42%);
+  }
+}
+
+.mf-hero-overlay-bubble {
+  will-change: clip-path;
+  clip-path: circle(0% at 50% 42%);
+  animation: mf-hero-overlay-bubble 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes mf-hero-text-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-mf-stagger-item {
+  opacity: 0;
+  transform: translateY(0.75rem);
+}
+
+.hero-mf-stagger-visible .hero-mf-stagger-item {
+  animation: mf-hero-text-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-mf-stagger-visible .hero-mf-stagger-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.hero-mf-stagger-visible .hero-mf-stagger-item:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.hero-mf-stagger-visible .hero-mf-stagger-item:nth-child(3) {
+  animation-delay: 0.31s;
+}
+
+.hero-mf-stagger-visible .hero-mf-stagger-item:nth-child(4) {
+  animation-delay: 0.44s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mf-hero-overlay-bubble {
+    animation: none;
+    clip-path: inset(0);
+    will-change: auto;
+  }
+
+  .hero-mf-stagger-item {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-mf-stagger-visible .hero-mf-stagger-item {
+    animation: none;
+  }
+
+  .hero-mf-glow-a,
+  .hero-mf-glow-b,
+  .hero-mf-glow-c {
+    animation: none;
+    opacity: 0.45;
+  }
+
+  .hero-mf-glow-a {
+    transform: translate(15%, 8%) scale(1.05);
+  }
+
+  .hero-mf-glow-b {
+    transform: translate(-10%, -12%) scale(1.08);
+  }
+
+  .hero-mf-glow-c {
+    transform: translate(25%, -5%) scale(1);
+  }
 }
