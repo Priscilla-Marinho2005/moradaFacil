@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useId, useState } from 'react'
+import HashLink from './HashLink'
 
-const navLinks = [
-  { label: 'Início', href: '#inicio' },
-  { label: 'Comprar', href: '#comprar' },
-  { label: 'Sobre nós', href: '#sobre' },
-  { label: 'Depoimentos', href: '#depoimentos' },
-  { label: 'Contato', href: '#contato' },
+const navLinksHome = [
+  { label: 'Início', to: '#inicio' },
+  { label: 'Comprar', to: '#comprar' },
+  { label: 'Sobre nós', to: '#sobre' },
+  { label: 'Depoimentos', to: '#depoimentos' },
+  { label: 'Contato', to: '#contato' },
 ]
 
 const SCROLL_THRESHOLD_PX = 12
@@ -42,7 +43,9 @@ function IconClose(props: { className?: string }) {
   )
 }
 
-export default function Navbar() {
+type NavbarProps = { variant?: 'hero' | 'solid' }
+
+export default function Navbar({ variant = 'hero' }: NavbarProps) {
   const [menuAberto, setMenuAberto] = useState(false)
   const [rolouPagina, setRolouPagina] = useState(false)
   const menuId = useId()
@@ -58,7 +61,8 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', atualizar)
   }, [])
 
-  const barraComFundo = rolouPagina || menuAberto
+  const noHero = variant === 'solid'
+  const barraComFundo = noHero || rolouPagina || menuAberto
 
   return (
     <header
@@ -66,7 +70,12 @@ export default function Navbar() {
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="flex min-w-0 items-center justify-between gap-3 py-3 sm:gap-6 sm:py-3.5 lg:gap-9 lg:py-4">
-          <a href="#inicio" className="min-w-0 shrink-0">
+          <HashLink
+            to="/"
+            hash="#inicio"
+            className="min-w-0 shrink-0"
+            onClick={fecharMenu}
+          >
             <img
               src="/logoClara.svg"
               alt="Morada Fácil"
@@ -74,20 +83,21 @@ export default function Navbar() {
               width={140}
               height={40}
             />
-          </a>
+          </HashLink>
 
           <nav
             className="hidden min-w-0 flex-1 items-center justify-center gap-6 text-sm font-medium text-mf-ice/95 lg:flex xl:gap-8"
             aria-label="Principal"
           >
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
+            {navLinksHome.map((link) => (
+              <HashLink
+                key={link.to}
+                to="/"
+                hash={link.to}
                 className="shrink-0 transition-colors hover:text-mf-white"
               >
                 {link.label}
-              </a>
+              </HashLink>
             ))}
           </nav>
 
@@ -106,12 +116,13 @@ export default function Navbar() {
                 <IconMenu className="size-5" />
               )}
             </button>
-            <a
-              href="#contato"
+            <HashLink
+              to="/"
+              hash="#contato"
               className="hidden items-center justify-center rounded-md bg-mf-blue px-5 py-2.5 text-sm font-semibold text-mf-white no-underline transition-colors hover:bg-mf-cobalt lg:inline-flex"
             >
               Fale conosco
-            </a>
+            </HashLink>
           </div>
         </div>
 
@@ -121,25 +132,27 @@ export default function Navbar() {
           hidden={!menuAberto}
         >
           <nav className="flex flex-col gap-0.5 pt-3" aria-label="Principal">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
+            {navLinksHome.map((link) => (
+              <HashLink
+                key={link.to}
+                to="/"
+                hash={link.to}
                 className="rounded-lg px-3 py-3 text-base font-medium text-mf-ice/95 no-underline transition-colors hover:bg-mf-white/10 hover:text-mf-white active:bg-mf-white/15"
                 onClick={fecharMenu}
               >
                 {link.label}
-              </a>
+              </HashLink>
             ))}
           </nav>
           <div className="mt-3 px-3 pb-1">
-            <a
-              href="#contato"
+            <HashLink
+              to="/"
+              hash="#contato"
               className="flex min-h-12 w-full items-center justify-center rounded-md bg-mf-blue px-4 py-3 text-sm font-semibold text-mf-white no-underline transition-colors hover:bg-mf-cobalt"
               onClick={fecharMenu}
             >
               Fale conosco
-            </a>
+            </HashLink>
           </div>
         </div>
       </div>

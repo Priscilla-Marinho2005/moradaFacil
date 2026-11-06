@@ -1,4 +1,5 @@
 import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa6'
+import HashLink from './HashLink'
 
 /** Ajuste para os perfis reais (mantenha igual à SobreSection) */
 const URL_INSTAGRAM = 'https://www.instagram.com/'
@@ -6,11 +7,11 @@ const URL_FACEBOOK = 'https://www.facebook.com/'
 const URL_WHATSAPP = 'https://wa.me/5581999999999'
 
 const navLinks = [
-  { label: 'Início', href: '#inicio' },
-  { label: 'Comprar', href: '#comprar' },
-  { label: 'Sobre nós', href: '#sobre' },
-  { label: 'Depoimentos', href: '#depoimentos' },
-  { label: 'Contato', href: '#contato' },
+  { label: 'Início', hash: '#inicio' },
+  { label: 'Comprar', hash: '#comprar' },
+  { label: 'Sobre nós', hash: '#sobre' },
+  { label: 'Depoimentos', hash: '#depoimentos' },
+  { label: 'Contato', hash: '#contato' },
 ]
 
 const socialLinkClass =
@@ -27,7 +28,7 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr] lg:gap-10">
           <div className="sm:col-span-2 lg:col-span-1">
-            <a href="#inicio" className="inline-block">
+            <HashLink to="/" hash="#inicio" className="inline-block">
               <img
                 src="/logoClara.svg"
                 alt="Morada Fácil"
@@ -35,7 +36,7 @@ export default function Footer() {
                 width={160}
                 height={44}
               />
-            </a>
+            </HashLink>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-mf-ice/70">
               Imobiliária no Grande Recife. Atendimento humano, transparência e
               imóveis selecionados para você encontrar o lugar certo.
@@ -48,13 +49,14 @@ export default function Footer() {
             </p>
             <nav className="mt-4 flex flex-col gap-2.5" aria-label="Rodapé">
               {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
+                <HashLink
+                  key={link.hash}
+                  to="/"
+                  hash={link.hash}
                   className="w-fit text-sm text-mf-ice/80 transition-colors hover:text-mf-white"
                 >
                   {link.label}
-                </a>
+                </HashLink>
               ))}
             </nav>
           </div>
@@ -88,7 +90,7 @@ export default function Footer() {
                 className={socialLinkClass}
                 aria-label="WhatsApp"
               >
-                <FaWhatsapp className="size-[1.125rem]" aria-hidden />
+                <FaWhatsapp className="size-4.5" aria-hidden />
               </a>
               <a
                 href={URL_INSTAGRAM}
@@ -97,7 +99,7 @@ export default function Footer() {
                 className={socialLinkClass}
                 aria-label="Instagram"
               >
-                <FaInstagram className="size-[1.125rem]" aria-hidden />
+                <FaInstagram className="size-4.5" aria-hidden />
               </a>
               <a
                 href={URL_FACEBOOK}
@@ -106,7 +108,7 @@ export default function Footer() {
                 className={socialLinkClass}
                 aria-label="Facebook"
               >
-                <FaFacebook className="size-[1.125rem]" aria-hidden />
+                <FaFacebook className="size-4.5" aria-hidden />
               </a>
             </div>
           </div>

@@ -1,150 +1,7 @@
 import { useEffect, useMemo, useState, type SelectHTMLAttributes } from 'react'
-
-type CityId = 'Recife' | 'São Lourenço da Mata'
-type PropertyTier = 'medio' | 'alto'
-
-type Listing = {
-    id: string
-    title: string
-    neighborhood: string
-    city: CityId
-    tier: PropertyTier
-    bedrooms: number
-    specs: string
-    priceLabel: string
-    priceValue: number
-    imageUrl: string
-    imageAlt: string
-}
-
-const LISTINGS: Listing[] = [
-    {
-        id: '1',
-        title: 'Apartamento na orla com vista',
-        neighborhood: 'Boa Viagem',
-        city: 'Recife',
-        tier: 'alto',
-        bedrooms: 3,
-        specs: '118 m² · 3 quartos (1 suíte) · 2 vagas',
-        priceLabel: 'R$ 1.250.000',
-        priceValue: 1_250_000,
-        imageUrl:
-            'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&q=80&auto=format&fit=crop',
-        imageAlt: 'Sala iluminada de apartamento moderno com sofá e janelas amplas',
-    },
-    {
-        id: '2',
-        title: 'Apartamento bem localizado',
-        neighborhood: 'Espinheiro',
-        city: 'Recife',
-        tier: 'medio',
-        bedrooms: 2,
-        specs: '68 m² · 2 quartos · 1 vaga',
-        priceLabel: 'R$ 520.000',
-        priceValue: 520_000,
-        imageUrl:
-            'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80&auto=format&fit=crop',
-        imageAlt: 'Ambiente integrado de cozinha e sala',
-    },
-    {
-        id: '3',
-        title: 'Apartamento compacto',
-        neighborhood: 'Casa Amarela',
-        city: 'Recife',
-        tier: 'medio',
-        bedrooms: 2,
-        specs: '54 m² · 2 quartos · 1 vaga',
-        priceLabel: 'R$ 385.000',
-        priceValue: 385_000,
-        imageUrl:
-            'https://images.unsplash.com/photo-1502672023488-70e25813eb80?w=900&q=80&auto=format&fit=crop',
-        imageAlt: 'Sala de apartamento compacto com sofá e janela',
-    },
-    {
-        id: '4',
-        title: 'Casa em condomínio',
-        neighborhood: 'Centro',
-        city: 'São Lourenço da Mata',
-        tier: 'medio',
-        bedrooms: 2,
-        specs: '95 m² · 2 quartos · 2 vagas',
-        priceLabel: 'R$ 295.000',
-        priceValue: 295_000,
-        imageUrl:
-            'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=900&q=80&auto=format&fit=crop',
-        imageAlt: 'Casa térrea com jardim',
-    },
-    {
-        id: '5',
-        title: 'Casa ampla com área gourmet',
-        neighborhood: 'Cidade Universitária',
-        city: 'São Lourenço da Mata',
-        tier: 'alto',
-        bedrooms: 4,
-        specs: '185 m² · 4 quartos (2 suítes) · 3 vagas',
-        priceLabel: 'R$ 980.000',
-        priceValue: 980_000,
-        imageUrl:
-            'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80&auto=format&fit=crop',
-        imageAlt: 'Residência com área externa',
-    },
-    {
-        id: '6',
-        title: 'Cobertura linear',
-        neighborhood: 'Pina',
-        city: 'Recife',
-        tier: 'alto',
-        bedrooms: 3,
-        specs: '152 m² · 3 quartos (2 suítes) · 3 vagas',
-        priceLabel: 'R$ 1.780.000',
-        priceValue: 1_780_000,
-        imageUrl:
-            'https://images.unsplash.com/photo-1560184897-ae75f418493e?w=900&q=80&auto=format&fit=crop',
-        imageAlt: 'Sala espaçosa com piso de madeira',
-    },
-    {
-        id: '7',
-        title: 'Apartamento no Derby',
-        neighborhood: 'Derby',
-        city: 'Recife',
-        tier: 'medio',
-        bedrooms: 2,
-        specs: '62 m² · 2 quartos · 1 vaga',
-        priceLabel: 'R$ 465.000',
-        priceValue: 465_000,
-        imageUrl:
-            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80&auto=format&fit=crop',
-        imageAlt: 'Fachada de edifício residencial',
-    },
-    {
-        id: '8',
-        title: 'Casa em rua tranquila',
-        neighborhood: 'Caetes',
-        city: 'São Lourenço da Mata',
-        tier: 'medio',
-        bedrooms: 3,
-        specs: '110 m² · 3 quartos · 2 vagas',
-        priceLabel: 'R$ 425.000',
-        priceValue: 425_000,
-        imageUrl:
-            'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=900&q=80&auto=format&fit=crop',
-        imageAlt: 'Casa com muro e portão',
-    },
-    {
-        id: '9',
-        title: 'Apartamento alto padrão com lazer',
-        neighborhood: 'Paulista',
-        city: 'Recife',
-        tier: 'alto',
-        bedrooms: 4,
-        specs: '168 m² · 4 quartos (3 suítes) · 3 vagas',
-        priceLabel: 'R$ 1.420.000',
-        priceValue: 1_420_000,
-        imageUrl:
-            'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=900&q=80&auto=format&fit=crop',
-        imageAlt: 'Varanda gourmet de apartamento',
-    },
-]
+import { Link } from 'react-router-dom'
+import { LISTINGS, type CityId, type PropertyTier, type PropertyListing } from '../data/listings'
+import { listingDetailPath } from '../routes'
 
 const ALL = '__all__' as const
 
@@ -270,15 +127,16 @@ function FilterSelect({
     )
 }
 
-function ListingCard({ listing }: { listing: Listing }) {
+function ListingCard({ listing }: { listing: PropertyListing }) {
     const tipoLabel = listing.tier === 'alto' ? 'Alto padrão' : 'Médio padrão'
+    const capa = listing.gallery[0]
 
     return (
         <article className="group flex flex-col overflow-hidden rounded-xl border border-mf-navy/8 bg-mf-white shadow-sm transition-shadow hover:shadow-md hover:border-mf-sky/25">
             <div className="relative aspect-4/3 overflow-hidden">
                 <img
-                    src={listing.imageUrl}
-                    alt={listing.imageAlt}
+                    src={capa.imageUrl}
+                    alt={capa.imageAlt}
                     className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     loading="lazy"
                     decoding="async"
@@ -308,12 +166,12 @@ function ListingCard({ listing }: { listing: Listing }) {
                         <p className="text-xs font-medium text-mf-navy/50">A partir de:</p>
                         <p className="text-lg font-bold text-mf-navy">{listing.priceLabel}</p>
                     </div>
-                    <a
-                        href="#contato"
+                    <Link
+                        to={listingDetailPath(listing.id)}
                         className="inline-flex items-center justify-center rounded-md bg-mf-blue px-4 py-2 text-sm font-semibold text-mf-white no-underline transition-colors hover:bg-mf-cobalt"
                     >
-                        Quero saber mais
-                    </a>
+                        Ver detalhes
+                    </Link>
                 </div>
             </div>
         </article>

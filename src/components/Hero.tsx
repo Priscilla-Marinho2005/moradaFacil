@@ -6,6 +6,8 @@ import {
     type PointerEvent,
 } from 'react'
 
+import HashLink from './HashLink'
+
 const HERO_IMAGE =
     'https://res.cloudinary.com/dkgjwrjpv/image/upload/v1786571816/engenhoPaulista_xsxbhj.webp'
 
@@ -120,19 +122,21 @@ export default function Hero() {
                     </p>
 
                     <div className="hero-mf-stagger-item flex flex-col gap-4 sm:flex-row sm:items-center">
-                        <a
-                            href="#comprar"
+                        <HashLink
+                            to="/"
+                            hash="#comprar"
                             className="inline-flex items-center justify-center gap-2 rounded-md bg-mf-blue px-6 py-3.5 text-sm font-semibold text-mf-white no-underline transition-colors hover:bg-mf-cobalt"
                         >
                             Encontrar meu imóvel
                             <ArrowIcon />
-                        </a>
-                        <a
-                            href="#contato"
+                        </HashLink>
+                        <HashLink
+                            to="/"
+                            hash="#contato"
                             className="inline-flex items-center justify-center rounded-md border border-mf-white/35 bg-mf-white/5 px-6 py-3.5 text-sm font-semibold text-mf-white no-underline backdrop-blur-sm transition-colors hover:border-mf-white/55 hover:bg-mf-white/10"
                         >
                             Fale com um especialista
-                        </a>
+                        </HashLink>
                     </div>
                 </div>
             </div>
